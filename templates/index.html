@@ -1,0 +1,127 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liver Disease Prediction</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+    <header>
+        <h1>Liver Disease Prediction Website</h1>
+    </header>
+
+    <div class="frontpageclass">
+        <h2>Welcome to the home page.</h2>
+        <p>This is mainly based on the application of machine learning, meant to be employed in remote and downtrodden areas.</p>
+        
+        <h2>Overview:</h2>
+        <p>In today's world, the shortage of doctors, particularly in countries like India, has led to a significant gap in access to timely medical care, leaving many individuals without proper checkups. This lack of adequate healthcare often results in preventable complications and, in some cases, even death due to delayed diagnoses or treatments. To address this pressing issue, this website is designed to bridge the gap by offering accessible and reliable healthcare solutions, aiming to ensure timely medical checkups and improve overall health outcomes for communities in need.</p>
+
+        <h2>Liver Disease</h2>
+        <img class="liverimage" src="{{ url_for('static', filename='liverdisease.jpg') }}" alt="Liver Disease Picture" />
+        <h3>Overview</h3>
+        <p>Liver disease is any disturbance of liver function that causes illness. The liver is responsible for many critical functions within the body, and should it become diseased or injured, the loss of those functions can cause significant damage to the body. Liver disease is also referred to as hepatic disease. It covers all potential problems that cause the liver to fail to perform its designated functions. Usually, more than 75% or three-quarters of liver tissue needs to be affected before a decrease in function occurs.</p>
+        
+        <h3>Symptoms</h3>
+        <p>Classic symptoms of liver disease include:</p>
+        <ul>
+            <li>Nausea</li>
+            <li>Vomiting</li>
+            <li>Right upper quadrant abdominal pain</li>
+            <li>Jaundice (a yellow discoloration of the skin due to elevated bilirubin concentrations in the bloodstream)</li>
+        </ul>
+    </div>
+
+    <form id="prediction-form">
+        <header>
+            <h1>Early Detection for Better Liver Health</h1>
+            <p>Empowering You with Automated Insights to Prevent Liver Disease</p>
+        </header>
+
+
+        <label for="age">Age:(1 to 90)</label>
+        <input type="number" id="age" name="age" required><br><br>
+
+        <label for="gender">Gender:(Male or Female)</label>
+        <select id="gender" name="gender" required>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select><br><br>
+
+        <label for="total_bilirubin">Total Bilirubin:(1.2 mg/dL)</label>
+        <input type="number" step="0.01" id="total_bilirubin" name="total_bilirubin" required><br><br>
+
+        <label for="direct_bilirubin">Direct Bilirubin:(0.1 to 19.7 mg/dL)</label>
+        <input type="number" step="0.01" id="direct_bilirubin" name="direct_bilirubin" required><br><br>
+
+        <label for="alkaline_phosphotase">Alkaline Phosphotase:(100 IU/L)</label>
+        <input type="number" step="0.01" id="alkaline_phosphotase" name="alkaline_phosphotase" required><br><br>
+
+        <label for="alamine_aminotransferase">Alamine Aminotransferase:(40 IU/L)</label>
+        <input type="number" step="0.01" id="alamine_aminotransferase" name="alamine_aminotransferase" required><br><br>
+
+        <label for="aspartate_aminotransferase">Aspartate Aminotransferase:(40 IU/L)</label>
+        <input type="number" step="0.01" id="aspartate_aminotransferase" name="aspartate_aminotransferase" required><br><br>
+
+        <label for="total_proteins">Total Proteins:(2.7 to 9.6 g/dL)</label>
+        <input type="number" step="0.01" id="total_proteins" name="total_proteins" required><br><br>
+
+        <label for="albumin">Albumin:(0.9 to 5.5 g/dL)</label>
+        <input type="number" step="0.01" id="albumin" name="albumin" required><br><br>
+
+        <label for="albumin_and_globulin_ratio">Albumin and Globulin Ratio:(0.3 to 2.8)</label>
+        <input type="number" step="0.01" id="albumin_and_globulin_ratio" name="albumin_and_globulin_ratio" required>
+        
+        <button type="submit">Predict</button>
+    </form>
+
+    <h2 id="result"></h2>
+
+    <section class="footer1">
+        <p>Copy right @Gouri Shankar,Madhuri,Sridhar,Sagar</p>
+        <div class="icons">
+            <a href="https://github.com/24shankar">Github</a>
+            <a href="https://www.youtube.com/watch?v=RudR2_VVoaw">Youtube</a>
+            <a href="https://www.linkedin.com/in/gouri-shankar-500a77284/">Linked In</a>
+        </div>
+    </section>
+    
+
+
+
+    <script>
+        $(document).ready(function() {
+            $('#prediction-form').on('submit', function(event) {
+                event.preventDefault(); // Prevent the form from submitting the default way
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/predict',
+                    data: {
+                        age: $('#age').val(),
+                        gender: $('#gender').val(),
+                        total_bilirubin: $('#total_bilirubin').val(),
+                        direct_bilirubin: $('#direct_bilirubin').val(),
+                        alkaline_phosphotase: $('#alkaline_phosphotase').val(),
+                        alamine_aminotransferase: $('#alamine_aminotransferase').val(),
+                        aspartate_aminotransferase: $('#aspartate_aminotransferase').val(),
+                        total_proteins: $('#total_proteins').val(),
+                        albumin: $('#albumin').val(),
+                        albumin_and_globulin_ratio: $('#albumin_and_globulin_ratio').val()
+                    },
+                    success: function(response) {
+                        $('#result').text(response.result);
+                    },
+                    error: function() {
+                        $('#result').text("An error occurred while processing your request.");
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
