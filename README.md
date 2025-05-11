@@ -1,6 +1,4 @@
-Certainly! Here's a professional and clear `README.md` for your [liver disease prediction project](https://github.com/kakkerlagourishankar/liver), designed to help visitors understand the project, its requirements, and how to execute it:
 
----
 
 # Liver Disease Prediction Web App
 
@@ -77,5 +75,3 @@ Contributions are welcome! Please fork the repository and submit a pull request 
 This project is licensed under the [MIT License](LICENSE).
 
 ---
-
-Feel free to customize this `README.md` further to include more specific details about your project, such as screenshots, detailed explanations of the model, or deployment instructions.
