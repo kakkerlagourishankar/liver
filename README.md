@@ -14,7 +14,7 @@ A machine learning-powered web application that predicts the likelihood of liver
 ## 📁 Project Structure
 
 ```
-liver/
+project-name/
 ├── app.py
 ├── model.py
 ├── liver_disease_gb_model.pkl
