@@ -1,6 +1,6 @@
 
 
-# Liver Disease Prediction Web App
+# Liver Disease Prediction Web Application
 
 A machine learning-powered web application that predicts the likelihood of liver disease based on user-provided medical parameters.
 
